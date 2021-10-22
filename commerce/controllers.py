@@ -17,4 +17,3 @@ def get_products(request):
 def get_address(request):
     return list(Address.objects.values())
 
-
