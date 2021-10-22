@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from ninja import NinjaAPI
+from commerce.controllers import product_controller, address_controller
+
+store = NinjaAPI()
+store.add_router('product', product_controller)
+store.add_router('adress', address_controller)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('store/', store.urls),
 ]

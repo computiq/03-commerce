@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from ninja import Router
 
-# Create your views here.
+from commerce.models import Address, Product
+
+product_controller = Router(tags=['Products'])
+address_controller = Router(tags=['Addresses'])
+
+@product_controller.get('product')
+def get_products(request):
+    return list(Product.objects.values())
+
+@address_controller.get('address')
+def get_addresses(request):
+    return list(Address.objects.values())

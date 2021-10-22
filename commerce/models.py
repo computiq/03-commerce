@@ -1,6 +1,6 @@
 import uuid
 
-from PIL.Image import Image
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -86,6 +86,10 @@ class Item(Entity):
 
 
 class OrderStatus(Entity):
+    class Meta:
+        verbose_name = 'order status'
+        verbose_name_plural = 'order statuses'
+
     NEW = 'NEW'  # Order with reference created, items are in the basket.
     # CREATED = 'CREATED'  # Created with items and pending payment.
     # HOLD = 'HOLD'  # Stock reduced but still awaiting payment.
@@ -200,6 +204,9 @@ class City(Entity):
 
 
 class Address(Entity):
+    class Meta:
+        verbose_name = 'address'
+        verbose_name_plural = 'addresses'
     user = models.ForeignKey(User, verbose_name='user', related_name='address',
                              on_delete=models.CASCADE)
     work_address = models.BooleanField('work address', null=True, blank=True)
