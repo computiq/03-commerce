@@ -1,6 +1,7 @@
 import uuid
 
-from PIL.Image import Image
+from PIL import ImageTk, Image
+from tkinter import Tk
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -150,7 +151,7 @@ class ProductImage(Entity):
              update_fields=None, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.image.path)
+        img = PIL.Image.open(self.image.path)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
             img.thumbnail(output_size)
