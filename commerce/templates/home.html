@@ -1,0 +1,194 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>product and address information</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico'%}" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css'%}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css'%}" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/select2/select2.min.css'%}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css'%}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}" />
+    <!--===============================================================================================-->
+  </head>
+  <body>
+    <div class="limiter">
+        <div class="wrap-table100">
+          <div class="table100 ver2">
+											<h1>Products Table</h1>
+            <table data-vertable="ver4" border="1">
+              <thead>
+                <tr class="row100 head">
+                  <th class="column100 column1" data-column="column1">
+                    productName
+                  </th>
+                  <th class="column100 column2" data-column="column2">
+                    productDiscription
+                  </th>
+                  <th class="column100 column3" data-column="column3">
+                    productQty
+                  </th>
+                  <th class="column100 column4" data-column="column4">
+                    productCost
+                  </th>
+                  <th class="column100 column5" data-column="column5">
+                    productPrice
+                  </th>
+                  <th class="column100 column6" data-column="column6">
+                    productweight
+                  </th>
+                  <th class="column100 column7" data-column="column7">
+                    productheight
+                  </th>
+                  <th class="column100 column8" data-column="column8">
+                    productwidth
+                  </th>
+                  <th class="column100 column9" data-column="column9">
+                    productlength
+                  </th>
+                  <th class="column100 column10" data-column="column10">
+                    discounted_price
+                  </th>
+                  </th>
+                  <th class="column100 column11" data-column="column11">
+                    productVendor
+                  </th>
+                  <th class="column100 column12" data-column="column12">
+                    productMerchant
+                  </th>
+                  <th class="column100 column13" data-column="column13">
+                    categoryName
+                  </th>
+                  <th class="column100 column14" data-column="column14">
+                    labelName
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+
+															{% for product in productinfo%}
+                <tr class="row100">
+                  <td class="column100 column1" data-column="column1">
+                    {{product.name}}
+                  </td>
+                  <td class="column100 column2" data-column="column2">
+                    {{product.description}}
+                  </td>
+                  <td class="column100 column3" data-column="column3">{{product.qty}}</td>
+                  <td class="column100 column4" data-column="column4">{{product.cost}}</td>
+                  </td>
+                  <td class="column100 column5" data-column="column5">{{product.price}}</td>
+                  <td class="column100 column6" data-column="column6">
+                    {{product.weight}}
+                  </td>
+                  <td class="column100 column7" data-column="column7">
+                    {{product.height}}
+                  </td>
+                  <td class="column100 column8" data-column="column8">
+                    {{product.width}}
+                  </td>
+                  <td class="column100 column9" data-column="column9">
+                    {{product.length}}
+                  </td>
+                  <td class="column100 column10" data-column="column10">
+                    {{product.discounted_price}}
+                  </td>
+                  <td class="column100 column11" data-column="column11">
+                    {{product.vendor}}
+                  </td>
+                  <td class="column100 column12" data-column="column12">
+                    {{product.merchant}}
+                  </td>
+                  <td class="column100 column13" data-column="column13">
+                    {{product.category}}
+                  </td>
+                  <td class="column100 column14" data-column="column14">
+                    {{product.label}}
+                  </td>
+                </tr>
+															{%endfor%}
+              </tbody>
+            </table>
+												<br>
+												<h1>Address Table</h1>
+            <table data-vertable="ver4" border="1">
+              <thead>
+                <tr class="row100 head">
+                  <th class="column100 column1" data-column="column1">
+                    First Name
+                  </th>
+                  <th class="column100 column2" data-column="column2">
+                    Address1
+                  </th>
+                  <th class="column100 column3" data-column="column3">
+                    Address2
+                  </th>
+                  <th class="column100 column4" data-column="column4">
+                    Phone No.
+                  </th>
+                  <th class="column100 column5" data-column="column5">
+                    City
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+
+															{% for address in addressinfo%}
+                <tr class="row100">
+                  <td class="column100 column1" data-column="column1">
+                    {{address.firstName}}
+                  </td>
+                  <td class="column100 column2" data-column="column2">
+                    {{address.address1}}
+                  </td>
+                  <td class="column100 column3" data-column="column3">{{address.address2}}</td>
+                  <td class="column100 column4" data-column="column4">{{address.phone}}</td>
+                  </td>
+                  <td class="column100 column5" data-column="column5">{{address.city}}</td>
+                  </td>
+                </tr>
+															{%endfor%}
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js'%}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/bootstrap/js/popper.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/select2/select2.min.js'%}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'js/main.js'%}"></script>
+  </body>
+</html>
