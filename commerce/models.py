@@ -1,6 +1,6 @@
 import uuid
 
-from PIL.Image import Image
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -104,7 +104,9 @@ class OrderStatus(Entity):
         (REFUNDED, REFUNDED),
     ])
     is_default = models.BooleanField('is default')
-
+    class Meta:
+        verbose_name = "order status"
+        verbose_name_plural = "order statuses"
     def __str__(self):
         return self.title
 
@@ -207,6 +209,8 @@ class Address(Entity):
     address2 = models.CharField('address2', null=True, blank=True, max_length=255)
     city = models.ForeignKey(City, related_name='addresses', on_delete=models.CASCADE)
     phone = models.CharField('phone', max_length=255)
-
+    class Meta:
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
     def __str__(self):
         return f'{self.user.first_name} - {self.address1} - {self.address2} - {self.phone}'
