@@ -106,7 +106,9 @@ class OrderStatus(Entity):
 
     def __str__(self):
         return self.title
-
+    class Meta:
+        verbose_name = 'order status'
+        verbose_name_plural = 'order statuses'
 
 class Category(Entity):
     parent = models.ForeignKey('commerce.Merchant', verbose_name='parent', related_name='children',
@@ -209,3 +211,6 @@ class Address(Entity):
 
     def __str__(self):
         return f'{self.user.first_name} - {self.address1} - {self.address2} - {self.phone}'
+    class Meta:
+        verbose_name = 'address'
+        verbose_name_plural = 'addresses'
