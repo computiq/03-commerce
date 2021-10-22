@@ -1,8 +1,5 @@
-from django.shortcuts import render
-from ninja import Router, Schema
-from ninja.main import NinjaAPI
-from django.http import JsonResponse
-from .models import Category, Product , Address
+from ninja import Router
+from .models import  Product , Address
 
 
 
@@ -21,6 +18,13 @@ def fetch_address(request):
     list_result = [p for p in result] 
     return list_result
 
+
+@commerce_controllers.get("related")
+def related_model_data(request):
+
+    result= Product.objects.select_related("category").values('name','category__name','category__image')  
+    list_result = [p for p in result] 
+    return list_result
 
 
 
