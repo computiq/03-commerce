@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from ninja import Router
+from commerce.models import Product, Address
 
 products_controller = Router(tags = ['products'])
-adresses_controller = Router(tags = ['adresses'])
+addresses_controller = Router(tags = ['addresses'])
 
-@products_controller.get('/products')
+@products_controller.get('')
 def listProducts(request):
-    return list(Product.objects.all())
+    return list(Product.objects.values())
 
-@adresses_controller.get('/adresses')
+@addresses_controller.get('')
 def listAdresses(request):
-   return list(Address.objects.all())
-#incase someone is stalking my solution, I'm not finished c;
+   return list(Address.objects.values())
