@@ -1,6 +1,6 @@
 import uuid
 
-from PIL.Image import Image
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -108,6 +108,10 @@ class OrderStatus(Entity):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Order status"
+        verbose_name_plural = 'Order statuses'
+
 
 class Category(Entity):
     parent = models.ForeignKey('self', verbose_name='parent', related_name='children',
@@ -118,7 +122,6 @@ class Category(Entity):
     description = models.TextField('description')
     image = models.ImageField('image', upload_to='category/')
     is_active = models.BooleanField('is active')
-
 
     def __str__(self):
         if self.parent:
@@ -210,3 +213,7 @@ class Address(Entity):
 
     def __str__(self):
         return f'{self.user.first_name} - {self.address1} - {self.address2} - {self.phone}'
+
+    class Meta:
+        verbose_name = 'Address'
+        verbose_name_plural = 'Addresses'
