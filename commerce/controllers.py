@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from ninja import Router
-from commerce.models import Product, Address, Vendor, Category, Merchant, Label
+from commerce.models import Product, Address, Vendor, Category, Merchant, Label, User, City
 
 products = Router()
 addresses = Router()
@@ -30,23 +30,14 @@ def get_products(request):
 
 @addresses.get("/addresses")
 def get_addresses(request):
-    addresses = list(Product.objects.values())
-
+    addresses = list(Address.objects.values())
     for address in addresses:
-        category_id = address['category_id']
-        del address['category_id']
-        address['category'] = list(Category.objects.filter(id=category_id).values())[0]
+        user_id = address['user_id']
+        del address['user_id']
+        address['user'] = list(User.objects.filter(id=user_id).values())[0]
         
-        label_id = address['label_id']
-        del address['label_id']
-        address['label'] = list(Label.objects.filter(id=label_id).values())[0]
-
-        merchant_id = address['merchant_id']
-        del address['merchant_id']
-        address['merchant'] = list(Merchant.objects.filter(id=merchant_id).values())[0]
-
-        vendor_id = address['vendor_id']
-        del address['vendor_id']
-        address['vendor'] = list(Vendor.objects.filter(id=vendor_id).values())[0]
+        city_id = address['city_id']
+        del address['city_id']
+        address['city'] = list(City.objects.filter(id=city_id).values())[0]
 
     return addresses
