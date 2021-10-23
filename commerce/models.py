@@ -1,6 +1,6 @@
 import uuid
 
-from PIL.Image import Image
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -179,7 +179,7 @@ class Vendor(Entity):
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None, *args, **kwargs):
         super().save(*args, **kwargs)
-
+    
         img = Image.open(self.image.path)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
