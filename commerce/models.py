@@ -210,3 +210,7 @@ class Address(Entity):
 
     def __str__(self):
         return f'{self.user.first_name} - {self.address1} - {self.address2} - {self.phone}'
+
+
+def product():
+    return None
