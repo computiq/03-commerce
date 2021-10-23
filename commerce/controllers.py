@@ -4,10 +4,7 @@ from ninja import Router
 from commerce.models import Product
 from commerce.models import Address
 from commerce.models import Category
-from django.http import HttpResponse, response
-
 commerce_controller = Router()
-from django.core import serializers
 
 
 @commerce_controller.get('get_products')
