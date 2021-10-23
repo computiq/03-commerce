@@ -1,5 +1,6 @@
 from ninja import Router
-from commerce.Schema import AddressOut,prudctsOut
+from commerce.Schema import prudctsOut
+from commerce.Schema import AddressOut
 from datetime import date
 from typing import List
 from ninja import NinjaAPI, Schema
