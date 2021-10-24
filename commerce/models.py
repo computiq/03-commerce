@@ -1,6 +1,11 @@
 import uuid
+from django.db import models
+#class Model:
+ #   objects: models.Manager()
 
-from PIL.Image import Image
+objects = models.Manager()
+
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
