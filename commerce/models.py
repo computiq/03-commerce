@@ -14,6 +14,9 @@ class Entity(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(editable=False, auto_now_add=True)
     updated = models.DateTimeField(editable=False, auto_now=True)
+    
+    def natural_key(self):
+    return {field.name: getattr(self, field.name) for field in self._meta.fields}
 
 
 class Product(Entity):
