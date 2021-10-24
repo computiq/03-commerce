@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from commerce.models import Product, Order, Item, Address, OrderStatus, ProductImage, City, Category
+from commerce.models import Product, Order, Item, Address, OrderStatus, ProductImage, City, Category ,Merchant, Label, Vendor
 
 admin.site.register(Product)
 admin.site.register(Order)
