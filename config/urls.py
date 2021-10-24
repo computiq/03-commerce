@@ -21,7 +21,7 @@ api = NinjaAPI()
 
 api.add_router('products', productsController)
 api.add_router('addresses', addressesController)
-# api.add_router('BonusTask', bonusTaskController)
+api.add_router('BonusTask', bonusTaskController)
 
 
 urlpatterns = [
