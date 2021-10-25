@@ -26,7 +26,8 @@ class Product(Entity):
     qty = models.DecimalField('qty', max_digits=10, decimal_places=2)
     cost = models.DecimalField('cost', max_digits=10, decimal_places=2)
     price = models.DecimalField('price', max_digits=10, decimal_places=2)
-    discounted_price = models.DecimalField('discounted price', max_digits=10, decimal_places=2)
+    discounted_price = models.DecimalField(
+        'discounted price', max_digits=10, decimal_places=2)
     vendor = models.ForeignKey('commerce.Vendor', verbose_name='vendor', related_name='products',
                                on_delete=models.SET_NULL,
                                null=True, blank=True)
@@ -52,13 +53,15 @@ class Order(Entity):
                              on_delete=models.CASCADE)
     address = models.ForeignKey('commerce.Address', verbose_name='address', null=True, blank=True,
                                 on_delete=models.CASCADE)
-    total = models.DecimalField('total', blank=True, null=True, max_digits=1000, decimal_places=0)
+    total = models.DecimalField(
+        'total', blank=True, null=True, max_digits=1000, decimal_places=0)
     status = models.ForeignKey('commerce.OrderStatus', verbose_name='status', related_name='orders',
                                on_delete=models.CASCADE)
     note = models.CharField('note', null=True, blank=True, max_length=255)
     ref_code = models.CharField('ref code', max_length=255)
     ordered = models.BooleanField('ordered')
-    items = models.ManyToManyField('commerce.Item', verbose_name='items', related_name='order')
+    items = models.ManyToManyField(
+        'commerce.Item', verbose_name='items', related_name='order')
 
     def __str__(self):
         return f'{self.user.first_name} + {self.total}'
@@ -75,7 +78,8 @@ class Item(Entity):
     Product can live alone in the system, while
     Item can only live within an order
     """
-    user = models.ForeignKey(User, verbose_name='user', related_name='items', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, verbose_name='user',
+                             related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey('commerce.Product', verbose_name='product',
                                 on_delete=models.CASCADE)
     item_qty = models.IntegerField('item_qty')
@@ -119,7 +123,6 @@ class Category(Entity):
     image = models.ImageField('image', upload_to='category/')
     is_active = models.BooleanField('is active')
 
-
     def __str__(self):
         if self.parent:
             return f'-   {self.name}'
@@ -150,12 +153,12 @@ class ProductImage(Entity):
              update_fields=None, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.image.path)
-        if img.height > 500 or img.width > 500:
-            output_size = (500, 500)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-            # print(self.image.path)
+        with Image.open(self.image.path) as img:
+            if img.height > 500 or img.width > 500:
+                output_size = (500, 500)
+                img.thumbnail(output_size)
+                img.save(self.image.path)
+                # print(self.image.path)
 
 
 class Label(Entity):
@@ -204,8 +207,10 @@ class Address(Entity):
                              on_delete=models.CASCADE)
     work_address = models.BooleanField('work address', null=True, blank=True)
     address1 = models.CharField('address1', max_length=255)
-    address2 = models.CharField('address2', null=True, blank=True, max_length=255)
-    city = models.ForeignKey(City, related_name='addresses', on_delete=models.CASCADE)
+    address2 = models.CharField(
+        'address2', null=True, blank=True, max_length=255)
+    city = models.ForeignKey(
+        City, related_name='addresses', on_delete=models.CASCADE)
     phone = models.CharField('phone', max_length=255)
 
     def __str__(self):
