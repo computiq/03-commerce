@@ -8,10 +8,9 @@ addresses_controller = Router(tags = ['addresses'])
 
 @products_controller.get('')
 def listProducts(request):
-    prod = Product.objects.all()
-    print(prod)
     return list(Product.objects.values())
 
 @addresses_controller.get('')
 def listAdresses(request):
    return list(Address.objects.values())
+
