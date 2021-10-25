@@ -1,6 +1,7 @@
 import uuid
-
-from PIL.Image import Image
+from PIL import ImageTk, Image
+from tkinter import Tk
+# from PIL.Image import Image
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -108,6 +109,9 @@ class OrderStatus(Entity):
     def __str__(self):
         return self.title
 
+        class Meta:
+            verbose_name = "order status"
+            verbose_name_plural = "order statuses"
 
 class Category(Entity):
     parent = models.ForeignKey('self', verbose_name='parent', related_name='children',
@@ -150,7 +154,7 @@ class ProductImage(Entity):
              update_fields=None, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        img = Image.open(self.image.path)
+        img = PIL.Image.open(self.image.path)
         if img.height > 500 or img.width > 500:
             output_size = (500, 500)
             img.thumbnail(output_size)
@@ -210,3 +214,7 @@ class Address(Entity):
 
     def __str__(self):
         return f'{self.user.first_name} - {self.address1} - {self.address2} - {self.phone}'
+
+        class Meta:
+            verbose_name = "Address"
+            verbose_name_plural = "Addresses"
