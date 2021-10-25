@@ -28,7 +28,6 @@ def addresses(request):
     return(list(Address.objects.values()))
     
     
-    """
 from django.contrib import admin
 from django.urls import path
 from ninja import NinjaAPI
