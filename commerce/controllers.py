@@ -28,9 +28,9 @@ commerce_control=Router()
 
 @commerce_control.get('pruduct_all',response=List[prudctsOut])
 def list_products(request):
-    return Product.objects.values()
+    return Product.objects.all() 
 
 
 @commerce_control.get('all_Address',response=List[AddressOut])
 def list_Address(request):
-    return Address.objects.values()     
+    return Address.objects.all()  
