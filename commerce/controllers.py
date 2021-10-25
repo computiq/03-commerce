@@ -31,6 +31,6 @@ def gitProducts(request):
      city =  [i.name for i in list(City.objects.all())]
      id=address.id
     
-     address_list.append({'id': id  ,'address1' : address.address1, 'address2' : address.address2 , 'phoneNo.' : address.phone , 'city' : city })
+     address_list.append({'address1' : address.address1, 'address2' : address.address2 , 'phone' : address.phone , 'city' : city })
     return address_list    
     
