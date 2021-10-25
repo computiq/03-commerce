@@ -1,41 +1,43 @@
-# GIZ Task 3 - COMMERCE
+from django.contrib import admin
 
-Task resolution process:
+from commerce.models import Product, Order, Item, Address, OrderStatus, ProductImage, City, Category,Vendor,Merchant,Label
 
-* Fork the repo
-* Clone the forked repo to your local machine
-* Resolve the task
-* Commit your solution
-* Push to GitHub
-* create a pull request
+admin.site.register(Product)
+admin.site.register(Order)
+admin.site.register(OrderStatus)
+admin.site.register(ProductImage)
+admin.site.register(City)
+admin.site.register(Category)
+admin.site.register(Label)
+admin.site.register(Merchant)
+admin.site.register(Vendor)
 
 
-# Task 3:
+from ninja import Router
+from django.shortcuts import render
 
-This is an intermediary task, you will have to complete the task to move to the next one.
+from commerce.models import Address, Product
 
-## create the following API endpoints
+commerce_controller = Router()
+@commerce_controller.get("products")
+def addresses(request):
+    return(list(Product.objects.values()))
 
-* return all products, you have to query the database somehow like for example: `Product.objects.all()`, then return the result QuerySet as a dictionary so Django-Ninja can serialize it to JSON.
+@commerce_controller.get("addresses")
+def addresses(request):
+    return(list(Address.objects.values()))
+    
+    
+    """
+from django.contrib import admin
+from django.urls import path
+from ninja import NinjaAPI
 
-```http request
-GET /api/products
-Content-Type: application/json
-```
+from commerce.controllers import commerce_controller
 
-* return all addresses, so you have to query the database to return all addresses: `Address.objects.all()`, then like in `products` endpoint, return a dictionary.
-
-```http request
-GET /api/addresses
-Content-Type: application/json
-```
-
-**Bonus task:**
-
-Instead of returning the related models as an ID, which is the default behaviour, you should return the related model data!
-
-**Hint:** If you apply what you learned until now, you can solve the tasks, including the bonus task! Think well!
-
-**Note:** 
-* You can refer to Django docs, Django-Ninja docs, online research, or any cheating/copy-paste method you prefer ;)
-* You can use what ever tools comfortable, packages, third party libraries, etc...
+api = NinjaAPI()
+api.add_router("commerce", commerce_controller)
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("commerce/", api.urls),
+]
