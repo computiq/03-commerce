@@ -4,7 +4,8 @@ from ninja import ModelSchema, Schema
 from ninja.orm import create_schema
 from pydantic import UUID4
 
-from commerce.models import Product, Merchant
+
+from commerce.models import Product, Merchant,Address
 
 
 class MessageOut(Schema):
@@ -41,6 +42,7 @@ class CategoryOut(UUIDSchema):
 
 CategoryOut.update_forward_refs()
 
+addresschema = create_schema(Address)
 
 class ProductOut(ModelSchema):
     vendor: VendorOut
@@ -64,9 +66,12 @@ class ProductOut(ModelSchema):
                         ]
 
 # class ProductManualSchemaOut(Schema):
-#     pass
+#
+class cityout(UUIDSchema):
+    name: str
 
-
+class userout(UUIDSchema):
+    name: str
 
 class CitySchema(Schema):
     name: str

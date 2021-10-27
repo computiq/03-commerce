@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404
 from ninja import Router
 from pydantic import UUID4
 
-from commerce.models import Product, Category, City
-from commerce.schemas import MessageOut, ProductOut, CitiesOut, CitySchema
+from commerce.models import Product, Category, City,Address
+from commerce.schemas import MessageOut, ProductOut, CitiesOut, CitySchema,userout,cityout,addresschema
 
 products_controller = Router(tags=['products'])
 address_controller = Router(tags=['addresses'])
@@ -79,9 +79,18 @@ select * from merchant where id in (mids) * 4 for (label, category and vendor)
 """
 
 
-@address_controller.get('')
-def list_addresses(request):
-    pass
+@address_controller.get( '',response={
+
+    200: List[addresschema],
+    404 : MessageOut,
+})
+def list_address(request):
+    add = Address.objects.all()
+
+    if add:
+        return add
+
+    return 404, {'detail': 'No addreses found'}
 
 
 # @products_controller.get('categories', response=List[CategoryOut])
