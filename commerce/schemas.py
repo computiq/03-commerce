@@ -64,6 +64,25 @@ class ProductOut(ModelSchema):
                         ]
 
 
+
+class ProductManualSchemaOut(Schema):
+    name:str
+    description:str
+    qty:float
+    price:float
+    discounted_price:float
+    vendor: VendorOut
+    label: LabelOut
+    merchant: MerchantOut
+    category: CategoryOut
+    weight:float = None
+    width:float = None
+    length:float
+    cost:float
+    height : float  = None
+    discounted_price:float
+    
+
 # class ProductManualSchemaOut(Schema):
 #     pass
 
