@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404
 from ninja import Router
 from pydantic import UUID4
 
-from commerce.models import Product, Category, City, Vendor, Item
-from commerce.schemas import MessageOut, ProductOut, CitiesOut, CitySchema, VendorOut, ItemOut, ItemSchema, ItemCreate
+from commerce.models import Address, Product, Category, City, Vendor, Item
+from commerce.schemas import MessageOut, ProductOut, CitiesOut, CitySchema, VendorOut, ItemOut, ItemSchema, ItemCreate,ProductManualSchemaOut
 
 products_controller = Router(tags=['products'])
 address_controller = Router(tags=['addresses'])
@@ -20,37 +20,15 @@ def list_vendors(request):
     return Vendor.objects.all()
 
 
-@products_controller.get('', response={
-    200: List[ProductOut],
-    404: MessageOut
-})
-def list_products(
-        request, *,
-        q: str = None,
-        price_from: int = None,
-        price_to: int = None,
-        vendor=None,
-):
-    products_qs = Product.objects.filter(is_active=True).select_related('merchant', 'vendor', 'category', 'label')
+@products_controller.get('')
+def all_prodect(request):
+    return list(Product.objects.values().all())
 
-    if not products_qs:
-        return 404, {'detail': 'No products found'}
+@address_controller.get('')
+def all_address(request):
+    return list(Address.objects.values().all())
 
-    if q:
-        products_qs = products_qs.filter(
-            Q(name__icontains=q) | Q(description__icontains=q)
-        )
-
-    if price_from:
-        products_qs = products_qs.filter(discounted_price__gte=price_from)
-
-    if price_to:
-        products_qs = products_qs.filter(discounted_price__lte=price_to)
-
-    if vendor:
-        products_qs = products_qs.filter(vendor_id=vendor)
-
-    return products_qs
+    
 
 
 """
@@ -220,3 +198,6 @@ def delete_item(request, id: UUID4):
     item.delete()
 
     return 204, {'detail': 'Item deleted!'}
+
+
+
